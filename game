@@ -1,0 +1,89 @@
+import turtle as t
+import random as rand
+
+#-----game configuration----
+#sets color
+tur_size = 2
+#sets size
+nerd = t.Turtle()
+wn = t.Screen()
+wn.bgpic('download.gif')
+wn.addshape('noo.gif')
+nerd.shape('noo.gif')
+#-----game configuration----
+#tur_Color = "blue"
+#sets size
+#tur_size = 2
+#sets shape
+font_setup = ("Arial", 20, "normal")
+#font and size
+score = 0
+
+#aifjaiodj
+counter_interval = 1000
+timer_up = False
+timer = 30000
+counter = t.Turtle()
+counter.hideturtle()
+counter.penup()
+counter.goto(0, 0)
+counter.pendown()
+
+#-----initialize turtle-----
+
+#nerd.shape(nerd.shape)
+#nerd.shapesize(tur_size)
+#nerd.fillcolor(tur_Color)
+score_writer = t.Turtle()
+score_writer.hideturtle()
+score_writer.penup()
+score_writer.goto(0, 0)  # x,y set to fit on smaller screen
+score_writer.pendown()
+
+#score_writer.hideturtle()
+
+
+#-----game functions--------
+def nerd_clicked(x, y):
+    global timer_up
+    if (not timer_up):
+        update_score()
+        change_position()
+    else:
+        nerd.hideturtle
+
+
+def change_position():
+    nerd.penup()
+    nerd.hideturtle()
+    new_ypos = rand.randint(-150, 150)
+    new_xpos = rand.randint(-200, 200)
+    nerd.goto(new_xpos, new_ypos)
+    nerd.pendown()
+    nerd.showturtle()
+
+
+def update_score():
+    global score  
+    score += 1
+    score_writer.clear()
+
+
+
+def countdown():
+    global timer, timer_up
+    counter.clear()
+    if timer <= 0:
+        counter.write("Time's Up", font=font_setup)
+        timer_up = True
+    else:
+        counter.write("Timer: " + str(timer), font=font_setup)
+        timer -= 1
+        counter.getscreen().ontimer(countdown, counter_interval)
+
+
+#-----events----------------\
+wn = t.Screen()
+nerd.onclick(nerd_clicked)
+#wn.ontimer(countdown, counter_interval)
+wn.mainloop()
